@@ -62,12 +62,7 @@ module VarSet : Set.S with type elt = Var.t
 
 module VarTbl : Hashtbl.S with type key = Var.t
 
-module VarMap :
-  sig
-    include Map.S with type key = Var.t
-
-    val update : key -> ('a option -> 'a option) -> 'a t -> 'a t
-  end
+module VarMap : Hamt.S with type key = Var.t
 
 (* [t] type of untyped OCaml term *)
 type t = Obj.t

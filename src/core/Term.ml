@@ -77,20 +77,24 @@ module Var =
 
     let hash x = Hashtbl.hash (x.env, x.index)
 
+    let pp x = Printf.sprintf "x%d [env = %d]" x.index x.env
   end
 
 module VarSet = Set.Make(Var)
 module VarTbl = Hashtbl.Make(Var)
 
-module VarMap =
-  struct
-    include Map.Make(Var)
+(* module VarMap = *)
+(*   struct *)
+(*     include Map.Make(Var) *)
 
-    let update k f m =
-      match f (try Some (find k m) with Not_found -> None) with
-      | Some x -> add k x m
-      | None   -> remove k m
-  end
+(*     let update k f m = *)
+(*       match f (try Some (find k m) with Not_found -> None) with *)
+(*       | Some x -> add k x m *)
+(*       | None   -> remove k m *)
+
+(*     let dbg m = failwith "not implemented" *)
+(*   end *)
+module VarMap = Hamt.Make(Var)(Var)
 
 type t = Obj.t
 type value = Obj.t

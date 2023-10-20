@@ -130,7 +130,7 @@ module Disjunct :
 
     let of_list = update Term.VarMap.empty
 
-    let samplevar t = fst @@ Term.VarMap.max_binding t
+    let samplevar t = fst @@ Term.VarMap.choose t
 
     type status =
       | Fulfiled
@@ -150,7 +150,7 @@ module Disjunct :
       | Violated      -> raise Disequality_violated
 
     let rec recheck env subst t =
-      let var, term = Term.VarMap.max_binding t in
+      let var, term = Term.VarMap.choose t in
       let unchecked = Term.VarMap.remove var t in
       match refine env subst (Obj.magic var) term with
       | Fulfiled       -> raise Disequality_fulfilled

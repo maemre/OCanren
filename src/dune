@@ -25,6 +25,7 @@
   List
   Timer
   Peep
+  Hamt
   OCanren)
  (libraries GT)
  (flags
