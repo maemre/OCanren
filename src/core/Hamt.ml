@@ -93,8 +93,6 @@ module Make (H: HashedType) (O: Map.OrderedType with type t = H.t) : S with type
        let segment = hash land bucket_mask
        and restOfHash = hash lsr key_segment_size in
        begin
-         Printf.printf "hash: %x = %x:%x\n%!" hash segment restOfHash;
-         Printf.printf "|children| = 0x%x = %d \n%!" (Bucket.length children) (Bucket.length children);
          match Bucket.get children segment with
        | None -> BNode (insert_at children segment (CNode ([(k, v)], restOfHash)))
        | Some child -> BNode (insert_at children segment (update_node k v restOfHash child))
