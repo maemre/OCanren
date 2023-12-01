@@ -52,7 +52,7 @@ module Make (H: HashedType) (O: Map.OrderedType with type t = H.t) : S with type
   type !'v t = 'v node
 
   (* bucket size parameters *)
-  let key_segment_size = 5
+  let key_segment_size = 6
   let bucket_size = 1 lsl key_segment_size
   let bucket_mask = bucket_size - 1
 
